@@ -97,7 +97,7 @@ dependencies {
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.31.4-beta")
 
     // Paging 3
-    val paging_version = "3.1.1"
+    val paging_version = "3.2.1"
     implementation("androidx.paging:paging-runtime-ktx:$paging_version")
     implementation("androidx.paging:paging-compose:3.2.1")
 
