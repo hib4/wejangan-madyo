@@ -1,7 +1,6 @@
 package me.hib4.wejanganmadyo.presentation.onboarding
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -20,8 +19,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import kotlinx.coroutines.launch
 import me.hib4.wejanganmadyo.presentation.Dimens.ExtraSmallPadding1
 import me.hib4.wejanganmadyo.presentation.Dimens.MediumPadding2
@@ -30,11 +27,13 @@ import me.hib4.wejanganmadyo.presentation.common.WejanganButton
 import me.hib4.wejanganmadyo.presentation.common.WejanganTextButton
 import me.hib4.wejanganmadyo.presentation.onboarding.components.OnBoardingCard
 import me.hib4.wejanganmadyo.presentation.onboarding.components.PageIndicator
-import me.hib4.wejanganmadyo.ui.theme.WejanganMadyoTheme
+import me.hib4.wejanganmadyo.presentation.onboarding.data.pages
 
-@ExperimentalFoundationApi
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun OnBoardingScreen() {
+fun OnBoardingScreen(
+    event: (OnBoardingEvent) -> Unit
+) {
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -86,8 +85,8 @@ fun OnBoardingScreen() {
                 Spacer(modifier = Modifier.width(ExtraSmallPadding1))
                 WejanganButton(text = buttonState[1]) {
                     scope.launch {
-                        if (pagerState.currentPage == 3) {
-                            // Put the logic here
+                        if (pagerState.currentPage == 2) {
+                            event(OnBoardingEvent.SaveAppEntry)
                         } else {
                             pagerState.animateScrollToPage(pagerState.currentPage + 1)
                         }
@@ -95,14 +94,5 @@ fun OnBoardingScreen() {
                 }
             }
         }
-    }
-}
-
-@ExperimentalFoundationApi
-@Preview
-@Composable
-fun OnBoardingScreenPreview() {
-    WejanganMadyoTheme {
-        OnBoardingScreen()
     }
 }

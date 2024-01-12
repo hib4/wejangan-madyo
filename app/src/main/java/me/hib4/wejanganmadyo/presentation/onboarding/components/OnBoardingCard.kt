@@ -20,8 +20,8 @@ import me.hib4.wejanganmadyo.R
 import me.hib4.wejanganmadyo.presentation.Dimens.ExtraSmallPadding1
 import me.hib4.wejanganmadyo.presentation.Dimens.MediumPadding1
 import me.hib4.wejanganmadyo.presentation.Dimens.MediumPadding2
-import me.hib4.wejanganmadyo.presentation.onboarding.Page
-import me.hib4.wejanganmadyo.presentation.onboarding.pages
+import me.hib4.wejanganmadyo.presentation.onboarding.data.Page
+import me.hib4.wejanganmadyo.presentation.onboarding.data.pages
 import me.hib4.wejanganmadyo.ui.theme.WejanganMadyoTheme
 
 @Composable

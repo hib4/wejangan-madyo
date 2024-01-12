@@ -1,4 +1,4 @@
-package me.hib4.wejanganmadyo.presentation.onboarding
+package me.hib4.wejanganmadyo.presentation.onboarding.data
 
 import androidx.annotation.DrawableRes
 import me.hib4.wejanganmadyo.R
@@ -6,7 +6,7 @@ import me.hib4.wejanganmadyo.R
 data class Page(
     val title: String,
     val description: String,
-    @DrawableRes val image: Int
+    @DrawableRes val image: Int,
 )
 
 val pages = listOf(
