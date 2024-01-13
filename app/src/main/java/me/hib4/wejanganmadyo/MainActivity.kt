@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Modifier
@@ -44,7 +45,9 @@ class MainActivity : ComponentActivity() {
                 }
 
                 Box(
-                    modifier = Modifier.background(MaterialTheme.colorScheme.background)
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(MaterialTheme.colorScheme.background)
                 ) {
                     val startDestination = viewModel.startDestination
                     NavGraph(startDestination = startDestination)
