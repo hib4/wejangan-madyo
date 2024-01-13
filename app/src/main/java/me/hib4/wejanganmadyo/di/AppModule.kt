@@ -7,9 +7,9 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import me.hib4.wejanganmadyo.data.manger.LocalUserMangerImpl
 import me.hib4.wejanganmadyo.domain.manger.LocalUserManger
-import me.hib4.wejanganmadyo.domain.usecases.AppEntryUseCases
-import me.hib4.wejanganmadyo.domain.usecases.ReadAppEntry
-import me.hib4.wejanganmadyo.domain.usecases.SaveAppEntry
+import me.hib4.wejanganmadyo.domain.usecases.appentry.AppEntryUseCases
+import me.hib4.wejanganmadyo.domain.usecases.appentry.ReadAppEntry
+import me.hib4.wejanganmadyo.domain.usecases.appentry.SaveAppEntry
 import javax.inject.Singleton
 
 @Module

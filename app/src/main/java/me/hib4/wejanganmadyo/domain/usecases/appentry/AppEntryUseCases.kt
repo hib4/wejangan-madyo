@@ -1,4 +1,4 @@
-package me.hib4.wejanganmadyo.domain.usecases
+package me.hib4.wejanganmadyo.domain.usecases.appentry
 
 data class AppEntryUseCases(
     val saveAppEntry: SaveAppEntry,

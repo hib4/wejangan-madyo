@@ -9,7 +9,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import me.hib4.wejanganmadyo.domain.usecases.AppEntryUseCases
+import me.hib4.wejanganmadyo.domain.usecases.appentry.AppEntryUseCases
 import me.hib4.wejanganmadyo.presentation.navgraph.Route
 import javax.inject.Inject
 

@@ -1,4 +1,4 @@
-package me.hib4.wejanganmadyo.domain.usecases
+package me.hib4.wejanganmadyo.domain.usecases.appentry
 
 import kotlinx.coroutines.flow.Flow
 import me.hib4.wejanganmadyo.domain.manger.LocalUserManger
