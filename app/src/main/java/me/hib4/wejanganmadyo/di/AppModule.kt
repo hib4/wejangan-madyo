@@ -15,6 +15,7 @@ import me.hib4.wejanganmadyo.domain.usecases.appentry.ReadAppEntry
 import me.hib4.wejanganmadyo.domain.usecases.appentry.SaveAppEntry
 import me.hib4.wejanganmadyo.domain.usecases.news.GetNews
 import me.hib4.wejanganmadyo.domain.usecases.news.NewsUseCases
+import me.hib4.wejanganmadyo.domain.usecases.news.SearchNews
 import me.hib4.wejanganmadyo.util.Constants.BASE_URL
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -58,6 +59,7 @@ object AppModule {
     fun provideNewsUseCases(
         newsRepository: NewsRepository,
     ): NewsUseCases = NewsUseCases(
-        getNews = GetNews(newsRepository)
+        getNews = GetNews(newsRepository),
+        searchNews = SearchNews(newsRepository)
     )
 }
