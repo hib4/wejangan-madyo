@@ -18,6 +18,7 @@ import me.hib4.wejanganmadyo.domain.usecases.appentry.AppEntryUseCases
 import me.hib4.wejanganmadyo.domain.usecases.appentry.ReadAppEntry
 import me.hib4.wejanganmadyo.domain.usecases.appentry.SaveAppEntry
 import me.hib4.wejanganmadyo.domain.usecases.news.DeleteArticle
+import me.hib4.wejanganmadyo.domain.usecases.news.GetArticle
 import me.hib4.wejanganmadyo.domain.usecases.news.GetArticles
 import me.hib4.wejanganmadyo.domain.usecases.news.GetNews
 import me.hib4.wejanganmadyo.domain.usecases.news.InsertArticle
@@ -71,6 +72,7 @@ object AppModule {
         searchNews = SearchNews(newsRepository),
         insertArticle = InsertArticle(newsDao),
         getArticles = GetArticles(newsDao),
+        getArticle = GetArticle(newsDao),
         deleteArticle = DeleteArticle(newsDao)
     )
 

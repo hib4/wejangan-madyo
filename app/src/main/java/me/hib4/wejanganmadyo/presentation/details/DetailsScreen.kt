@@ -29,7 +29,7 @@ import me.hib4.wejanganmadyo.presentation.details.components.DetailsTopBar
 @Composable
 fun DetailsScreen(
     article: Article,
-    event: (DetailEvent) -> Unit,
+    event: (DetailsEvent) -> Unit,
     navigateUp: () -> Unit,
 ) {
     val context = LocalContext.current
@@ -41,7 +41,7 @@ fun DetailsScreen(
     ) {
         DetailsTopBar(
             onBackClick = navigateUp,
-            onBookmarkClick = { event(DetailEvent.SaveArticle) },
+            onBookmarkClick = { event(DetailsEvent.InsertDeleteArticle(article)) },
             onShareClick = {
                 Intent(Intent.ACTION_SEND).also {
                     it.putExtra(Intent.EXTRA_TEXT, article.url)
