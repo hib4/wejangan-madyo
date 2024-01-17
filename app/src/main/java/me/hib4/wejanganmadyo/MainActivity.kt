@@ -14,10 +14,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
+import androidx.lifecycle.lifecycleScope
+import androidx.room.PrimaryKey
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import me.hib4.wejanganmadyo.data.local.NewsDao
+import me.hib4.wejanganmadyo.domain.model.Article
+import me.hib4.wejanganmadyo.domain.model.Source
 import me.hib4.wejanganmadyo.presentation.navgraph.NavGraph
 import me.hib4.wejanganmadyo.ui.theme.WejanganMadyoTheme
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
