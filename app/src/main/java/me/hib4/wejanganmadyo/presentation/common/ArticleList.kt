@@ -16,6 +16,28 @@ import me.hib4.wejanganmadyo.presentation.Dimens.MediumPadding1
 
 @Composable
 fun ArticleList(
+    articles: List<Article>,
+    onClick: (Article) -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    LazyColumn(
+        verticalArrangement = Arrangement.spacedBy(MediumPadding1),
+        contentPadding = PaddingValues(ExtraSmallPadding2),
+        modifier = modifier.fillMaxSize()
+    ) {
+        items(articles.size) {
+            val article = articles[it]
+            ArticleCard(
+                article = article,
+                onClick = { onClick(article) }
+            )
+
+        }
+    }
+}
+
+@Composable
+fun ArticleList(
     articles: LazyPagingItems<Article>,
     onClick: (Article) -> Unit,
     modifier: Modifier = Modifier,

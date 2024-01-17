@@ -17,7 +17,10 @@ import me.hib4.wejanganmadyo.domain.repository.NewsRepository
 import me.hib4.wejanganmadyo.domain.usecases.appentry.AppEntryUseCases
 import me.hib4.wejanganmadyo.domain.usecases.appentry.ReadAppEntry
 import me.hib4.wejanganmadyo.domain.usecases.appentry.SaveAppEntry
+import me.hib4.wejanganmadyo.domain.usecases.news.DeleteArticle
+import me.hib4.wejanganmadyo.domain.usecases.news.GetArticles
 import me.hib4.wejanganmadyo.domain.usecases.news.GetNews
+import me.hib4.wejanganmadyo.domain.usecases.news.InsertArticle
 import me.hib4.wejanganmadyo.domain.usecases.news.NewsUseCases
 import me.hib4.wejanganmadyo.domain.usecases.news.SearchNews
 import me.hib4.wejanganmadyo.util.Constants.BASE_URL
@@ -62,9 +65,13 @@ object AppModule {
     @Singleton
     fun provideNewsUseCases(
         newsRepository: NewsRepository,
+        newsDao: NewsDao,
     ): NewsUseCases = NewsUseCases(
         getNews = GetNews(newsRepository),
-        searchNews = SearchNews(newsRepository)
+        searchNews = SearchNews(newsRepository),
+        insertArticle = InsertArticle(newsDao),
+        getArticles = GetArticles(newsDao),
+        deleteArticle = DeleteArticle(newsDao)
     )
 
     @Provides
