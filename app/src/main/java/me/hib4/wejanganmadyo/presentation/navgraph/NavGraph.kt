@@ -6,15 +6,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
-import androidx.paging.compose.collectAsLazyPagingItems
-import me.hib4.wejanganmadyo.presentation.bookmark.BookmarkScreen
-import me.hib4.wejanganmadyo.presentation.bookmark.BookmarkViewModel
-import me.hib4.wejanganmadyo.presentation.home.HomeScreen
-import me.hib4.wejanganmadyo.presentation.home.HomeViewModel
+import me.hib4.wejanganmadyo.presentation.navigator.WejanganNavigator
 import me.hib4.wejanganmadyo.presentation.onboarding.OnBoardingScreen
 import me.hib4.wejanganmadyo.presentation.onboarding.OnBoardingViewModel
-import me.hib4.wejanganmadyo.presentation.search.SearchScreen
-import me.hib4.wejanganmadyo.presentation.search.SearchViewModel
 
 @Composable
 fun NavGraph(startDestination: String) {
@@ -36,36 +30,7 @@ fun NavGraph(startDestination: String) {
             startDestination = Route.NewsNavigatorScreen.route
         ) {
             composable(route = Route.NewsNavigatorScreen.route) {
-                val viewModel: HomeViewModel = hiltViewModel()
-                val articles = viewModel.news.collectAsLazyPagingItems()
-                HomeScreen(articles = articles, navigate = {})
-            }
-        }
-
-        navigation(
-            route = Route.NewsNavigation.route,
-            startDestination = Route.SearchScreen.route
-        ) {
-            composable(route = Route.SearchScreen.route) {
-                val viewModel: SearchViewModel = hiltViewModel()
-                SearchScreen(
-                    state = viewModel.state.value,
-                    event = viewModel::onEvent,
-                    navigate = {}
-                )
-            }
-        }
-
-        navigation(
-            route = Route.NewsNavigation.route,
-            startDestination = Route.BookmarkScreen.route
-        ) {
-            composable(route = Route.BookmarkScreen.route) {
-                val viewModel: BookmarkViewModel = hiltViewModel()
-                BookmarkScreen(
-                    state = viewModel.state.value,
-                    navigate = {}
-                )
+                WejanganNavigator()
             }
         }
     }

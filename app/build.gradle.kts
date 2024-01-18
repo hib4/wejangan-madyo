@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("com.google.devtools.ksp")
     id("com.google.dagger.hilt.android")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -73,7 +74,7 @@ dependencies {
     implementation("androidx.core:core-splashscreen:1.0.1")
 
     // Compose Navigation
-    val nav_version = "2.7.6"
+    val nav_version = "2.7.2"
     implementation("androidx.navigation:navigation-compose:$nav_version")
 
     // Dagger Hilt

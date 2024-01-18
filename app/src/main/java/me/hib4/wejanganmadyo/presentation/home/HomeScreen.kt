@@ -27,13 +27,13 @@ import me.hib4.wejanganmadyo.domain.model.Article
 import me.hib4.wejanganmadyo.presentation.Dimens.MediumPadding1
 import me.hib4.wejanganmadyo.presentation.common.ArticleList
 import me.hib4.wejanganmadyo.presentation.common.SearchBar
-import me.hib4.wejanganmadyo.presentation.navgraph.Route
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomeScreen(
     articles: LazyPagingItems<Article>,
-    navigate: (String) -> Unit,
+    navigateToSearch: () -> Unit,
+    navigateToDetails: (Article) -> Unit,
 ) {
     val titles by remember {
         derivedStateOf {
@@ -69,9 +69,7 @@ fun HomeScreen(
             text = "Search",
             readOnly = true,
             onValueChange = {},
-            onClick = {
-                navigate(Route.SearchScreen.route)
-            },
+            onClick = navigateToSearch,
             onSearch = {},
             modifier = Modifier.padding(horizontal = MediumPadding1)
         )
@@ -89,7 +87,7 @@ fun HomeScreen(
         ArticleList(
             articles = articles,
             onClick = {
-                navigate(Route.DetailScreen.route)
+                navigateToDetails(it)
             },
             modifier = Modifier.padding(horizontal = MediumPadding1)
         )

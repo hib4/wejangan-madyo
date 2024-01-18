@@ -13,14 +13,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import me.hib4.wejanganmadyo.R
+import me.hib4.wejanganmadyo.domain.model.Article
 import me.hib4.wejanganmadyo.presentation.Dimens.MediumPadding1
 import me.hib4.wejanganmadyo.presentation.common.ArticleList
-import me.hib4.wejanganmadyo.presentation.navgraph.Route
 
 @Composable
 fun BookmarkScreen(
     state: BookmarkState,
-    navigate: (String) -> Unit,
+    navigateToDetails: (Article) -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -36,7 +36,7 @@ fun BookmarkScreen(
         Spacer(modifier = Modifier.height(MediumPadding1))
         ArticleList(
             articles = state.articles,
-            onClick = { navigate(Route.DetailScreen.route) }
+            onClick = { navigateToDetails(it) }
         )
     }
 }

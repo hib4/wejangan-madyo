@@ -85,7 +85,7 @@ fun DetailsScreen(
                     style = MaterialTheme.typography.displaySmall
                 )
                 Text(
-                    text = article.title,
+                    text = article.content,
                     color = colorResource(id = R.color.body),
                     style = MaterialTheme.typography.bodyMedium
                 )

@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val appEntryUseCases: AppEntryUseCases,
+    appEntryUseCases: AppEntryUseCases,
 ) : ViewModel() {
     var splashCondition by mutableStateOf(true)
         private set
@@ -30,7 +30,7 @@ class MainViewModel @Inject constructor(
             } else {
                 Route.AppStartNavigation.route
             }
-            delay(100)
+            delay(500)
             splashCondition = false
         }.launchIn(viewModelScope)
     }
