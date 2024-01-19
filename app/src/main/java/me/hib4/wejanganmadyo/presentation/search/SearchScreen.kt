@@ -22,20 +22,22 @@ fun SearchScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(start = MediumPadding1, top = MediumPadding1, end = MediumPadding1)
+            .padding(top = MediumPadding1)
             .statusBarsPadding()
     ) {
         SearchBar(
             text = state.query,
             onValueChange = { event(SearchEvent.UpdateSearchQuery(it)) },
-            onSearch = { event(SearchEvent.SearchNews) }
+            onSearch = { event(SearchEvent.SearchNews) },
+            modifier = Modifier.padding(horizontal = MediumPadding1)
         )
         Spacer(modifier = Modifier.padding(MediumPadding1))
         state.articles?.let {
             val articles = it.collectAsLazyPagingItems()
             ArticleList(
                 articles = articles,
-                onClick = { navigateToDetails(it) }
+                onClick = navigateToDetails,
+                modifier = Modifier.padding(horizontal = MediumPadding1)
             )
         }
     }

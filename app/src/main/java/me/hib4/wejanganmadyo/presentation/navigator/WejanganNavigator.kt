@@ -1,6 +1,6 @@
 package me.hib4.wejanganmadyo.presentation.navigator
 
-import android.widget.Toast
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -11,7 +11,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
@@ -23,7 +22,6 @@ import me.hib4.wejanganmadyo.R
 import me.hib4.wejanganmadyo.domain.model.Article
 import me.hib4.wejanganmadyo.presentation.bookmark.BookmarkScreen
 import me.hib4.wejanganmadyo.presentation.bookmark.BookmarkViewModel
-import me.hib4.wejanganmadyo.presentation.details.DetailsEvent
 import me.hib4.wejanganmadyo.presentation.details.DetailsScreen
 import me.hib4.wejanganmadyo.presentation.details.DetailsViewModel
 import me.hib4.wejanganmadyo.presentation.home.HomeScreen
@@ -71,17 +69,17 @@ fun WejanganNavigator() {
                     selected = selectedItem,
                     onItemSelected = { index ->
                         when (index) {
-                            0 -> navigateToTap(
+                            0 -> navigateToTab(
                                 navController = navController,
                                 route = Route.HomeScreen.route
                             )
 
-                            1 -> navigateToTap(
+                            1 -> navigateToTab(
                                 navController = navController,
                                 route = Route.SearchScreen.route
                             )
 
-                            2 -> navigateToTap(
+                            2 -> navigateToTab(
                                 navController = navController,
                                 route = Route.BookmarkScreen.route
                             )
@@ -105,7 +103,7 @@ fun WejanganNavigator() {
                 HomeScreen(
                     articles = articles,
                     navigateToSearch = {
-                        navigateToTap(
+                        navigateToTab(
                             navController = navController,
                             route = Route.SearchScreen.route
                         )
@@ -121,17 +119,13 @@ fun WejanganNavigator() {
 
             composable(route = Route.DetailScreen.route) {
                 val viewModel: DetailsViewModel = hiltViewModel()
-                if (viewModel.sideEffect != null) {
-                    Toast.makeText(LocalContext.current, viewModel.sideEffect, Toast.LENGTH_SHORT)
-                        .show()
-                    viewModel.onEvent(DetailsEvent.RemoveSideEffect)
-                }
                 navController.previousBackStackEntry?.savedStateHandle?.get<Article?>("article")
                     ?.let {
                         DetailsScreen(
                             article = it,
                             event = viewModel::onEvent,
-                            navigateUp = { navController.navigateUp() }
+                            navigateUp = { navController.navigateUp() },
+                            sideEffect = viewModel.sideEffect
                         )
                     }
             }
@@ -139,6 +133,7 @@ fun WejanganNavigator() {
             composable(route = Route.SearchScreen.route) {
                 val viewModel: SearchViewModel = hiltViewModel()
                 val state = viewModel.state.value
+                OnBackClickStateSaver(navController = navController)
                 SearchScreen(
                     state = state,
                     event = viewModel::onEvent,
@@ -154,6 +149,7 @@ fun WejanganNavigator() {
             composable(route = Route.BookmarkScreen.route) {
                 val viewModel: BookmarkViewModel = hiltViewModel()
                 val state = viewModel.state.value
+                OnBackClickStateSaver(navController = navController)
                 BookmarkScreen(
                     state = state,
                     navigateToDetails = {
@@ -168,7 +164,17 @@ fun WejanganNavigator() {
     }
 }
 
-private fun navigateToTap(navController: NavController, route: String) {
+@Composable
+fun OnBackClickStateSaver(navController: NavController) {
+    BackHandler(true) {
+        navigateToTab(
+            navController = navController,
+            route = Route.HomeScreen.route
+        )
+    }
+}
+
+private fun navigateToTab(navController: NavController, route: String) {
     navController.navigate(route) {
         navController.graph.startDestinationRoute?.let {
             popUpTo(it) {

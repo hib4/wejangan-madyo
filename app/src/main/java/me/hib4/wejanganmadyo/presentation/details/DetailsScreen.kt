@@ -2,6 +2,7 @@ package me.hib4.wejanganmadyo.presentation.details
 
 import android.content.Intent
 import android.net.Uri
+import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -13,6 +14,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
@@ -25,14 +27,28 @@ import me.hib4.wejanganmadyo.domain.model.Article
 import me.hib4.wejanganmadyo.presentation.Dimens.ArticleImageHeight
 import me.hib4.wejanganmadyo.presentation.Dimens.MediumPadding1
 import me.hib4.wejanganmadyo.presentation.details.components.DetailsTopBar
+import me.hib4.wejanganmadyo.util.UiComponent
 
 @Composable
 fun DetailsScreen(
     article: Article,
     event: (DetailsEvent) -> Unit,
     navigateUp: () -> Unit,
+    sideEffect: UiComponent?
 ) {
     val context = LocalContext.current
+
+    LaunchedEffect(sideEffect) {
+        sideEffect?.let {
+            when(sideEffect){
+                is UiComponent.Toast ->{
+                    Toast.makeText(context, sideEffect.message, Toast.LENGTH_SHORT).show()
+                    event(DetailsEvent.RemoveSideEffect)
+                }
+                else -> Unit
+            }
+        }
+    }
 
     Column(
         modifier = Modifier

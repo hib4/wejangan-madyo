@@ -74,7 +74,7 @@ dependencies {
     implementation("androidx.core:core-splashscreen:1.0.1")
 
     // Compose Navigation
-    val nav_version = "2.7.2"
+    val nav_version = "2.6.0"
     implementation("androidx.navigation:navigation-compose:$nav_version")
 
     // Dagger Hilt

@@ -9,13 +9,14 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import me.hib4.wejanganmadyo.domain.model.Article
 import me.hib4.wejanganmadyo.domain.usecases.news.NewsUseCases
+import me.hib4.wejanganmadyo.util.UiComponent
 import javax.inject.Inject
 
 @HiltViewModel
 class DetailsViewModel @Inject constructor(
     private val newsUseCases: NewsUseCases,
 ) : ViewModel() {
-    var sideEffect by mutableStateOf<String?>(null)
+    var sideEffect by mutableStateOf<UiComponent?>(null)
         private set
 
     fun onEvent(event: DetailsEvent) {
@@ -39,11 +40,11 @@ class DetailsViewModel @Inject constructor(
 
     private suspend fun insertArticle(article: Article) {
         newsUseCases.insertArticle(article)
-        sideEffect = "Article Saved."
+        sideEffect = UiComponent.Toast("Article Saved.")
     }
 
     private suspend fun deleteArticle(article: Article) {
         newsUseCases.deleteArticle(article)
-        sideEffect = "Article Deleted."
+        sideEffect = UiComponent.Toast("Article Deleted.")
     }
 }

@@ -36,7 +36,7 @@ fun BookmarkScreen(
         Spacer(modifier = Modifier.height(MediumPadding1))
         ArticleList(
             articles = state.articles,
-            onClick = { navigateToDetails(it) }
+            onClick = navigateToDetails
         )
     }
 }
