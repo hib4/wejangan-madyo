@@ -14,22 +14,25 @@ import me.hib4.wejanganmadyo.presentation.onboarding.OnBoardingViewModel
 fun NavGraph(startDestination: String) {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = startDestination) {
+    NavHost(
+        navController = navController,
+        startDestination = startDestination
+    ) {
         navigation(
-            route = Route.AppStartNavigation.route,
-            startDestination = Route.OnBoardingScreen.route
+            route = Route.AppStartNavigation.name,
+            startDestination = Route.OnBoardingScreen.name
         ) {
-            composable(route = Route.OnBoardingScreen.route) {
+            composable(route = Route.OnBoardingScreen.name) {
                 val viewModel: OnBoardingViewModel = hiltViewModel()
                 OnBoardingScreen(event = viewModel::onEvent)
             }
         }
 
         navigation(
-            route = Route.NewsNavigation.route,
-            startDestination = Route.NewsNavigatorScreen.route
+            route = Route.NewsNavigation.name,
+            startDestination = Route.NewsNavigatorScreen.name
         ) {
-            composable(route = Route.NewsNavigatorScreen.route) {
+            composable(route = Route.NewsNavigatorScreen.name) {
                 WejanganNavigator()
             }
         }

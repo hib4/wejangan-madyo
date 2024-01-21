@@ -38,20 +38,19 @@ fun WejanganNavigator() {
     val backStackState = navController.currentBackStackEntryAsState().value
 
     val isBottomBarVisible = remember(backStackState) {
-        backStackState?.destination?.route != Route.DetailScreen.route
+        backStackState?.destination?.route != Route.DetailScreen.name
     }
 
     var selectedItem by rememberSaveable {
         mutableIntStateOf(0)
     }
 
-    selectedItem = when (backStackState?.destination?.route) {
-        Route.HomeScreen.route -> 0
-        Route.SearchScreen.route -> 1
-        Route.BookmarkScreen.route -> 2
+    when (backStackState?.destination?.route) {
+        Route.HomeScreen.name -> 0
+        Route.SearchScreen.name -> 1
+        Route.BookmarkScreen.name -> 2
         else -> 0
-    }
-
+    }.also { selectedItem = it }
 
     val bottomNavigationItems = remember {
         listOf(
@@ -71,17 +70,17 @@ fun WejanganNavigator() {
                         when (index) {
                             0 -> navigateToTab(
                                 navController = navController,
-                                route = Route.HomeScreen.route
+                                route = Route.HomeScreen.name
                             )
 
                             1 -> navigateToTab(
                                 navController = navController,
-                                route = Route.SearchScreen.route
+                                route = Route.SearchScreen.name
                             )
 
                             2 -> navigateToTab(
                                 navController = navController,
-                                route = Route.BookmarkScreen.route
+                                route = Route.BookmarkScreen.name
                             )
                         }
                     }
@@ -94,10 +93,10 @@ fun WejanganNavigator() {
 
         NavHost(
             navController = navController,
-            startDestination = Route.HomeScreen.route,
+            startDestination = Route.HomeScreen.name,
             modifier = Modifier.padding(bottom = bottomPadding)
         ) {
-            composable(route = Route.HomeScreen.route) {
+            composable(route = Route.HomeScreen.name) {
                 val viewModel: HomeViewModel = hiltViewModel()
                 val articles = viewModel.news.collectAsLazyPagingItems()
                 HomeScreen(
@@ -105,7 +104,7 @@ fun WejanganNavigator() {
                     navigateToSearch = {
                         navigateToTab(
                             navController = navController,
-                            route = Route.SearchScreen.route
+                            route = Route.SearchScreen.name
                         )
                     },
                     navigateToDetails = {
@@ -117,7 +116,7 @@ fun WejanganNavigator() {
                 )
             }
 
-            composable(route = Route.DetailScreen.route) {
+            composable(route = Route.DetailScreen.name) {
                 val viewModel: DetailsViewModel = hiltViewModel()
                 navController.previousBackStackEntry?.savedStateHandle?.get<Article?>("article")
                     ?.let {
@@ -130,7 +129,7 @@ fun WejanganNavigator() {
                     }
             }
 
-            composable(route = Route.SearchScreen.route) {
+            composable(route = Route.SearchScreen.name) {
                 val viewModel: SearchViewModel = hiltViewModel()
                 val state = viewModel.state.value
                 OnBackClickStateSaver(navController = navController)
@@ -146,7 +145,7 @@ fun WejanganNavigator() {
                 )
             }
 
-            composable(route = Route.BookmarkScreen.route) {
+            composable(route = Route.BookmarkScreen.name) {
                 val viewModel: BookmarkViewModel = hiltViewModel()
                 val state = viewModel.state.value
                 OnBackClickStateSaver(navController = navController)
@@ -169,7 +168,7 @@ fun OnBackClickStateSaver(navController: NavController) {
     BackHandler(true) {
         navigateToTab(
             navController = navController,
-            route = Route.HomeScreen.route
+            route = Route.HomeScreen.name
         )
     }
 }
@@ -188,7 +187,5 @@ private fun navigateToTab(navController: NavController, route: String) {
 
 private fun navigateToDetails(navController: NavController, article: Article) {
     navController.currentBackStackEntry?.savedStateHandle?.set("article", article)
-    navController.navigate(
-        route = Route.DetailScreen.route
-    )
+    navController.navigate(Route.DetailScreen.name)
 }
